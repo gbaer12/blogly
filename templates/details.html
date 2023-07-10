@@ -23,7 +23,7 @@
     </form>
     
     <form action="/{{user.id}}/delete" method="POST">
-        <button>Delete</button>
+        <button onclick="return confirm('Are you sure you want to DELETE this user?')">Delete</button>
     </form>
 
     <form action="/">
