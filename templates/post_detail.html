@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+    {% block title%}Post{% endblock %}
+
+    {% block content %}
+    <div class="container">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <h3 class="card-title">{{post.title}}</h3>
+            
+            <p class="card-text">{{post.content}}</p>
+
+            <blockquote>@{{user.first_name}} {{user.last_name}} on {{post.friendly_date}}</blockquote>
+
+            <form action="">
+            <a href="/{{user.id}}" class="btn btn-primary">Go Back</a>
+            
+            <a href="/{{user.id}}/{{post.id}}/edit" class="btn btn-warning">Edit</a>
+
+            <button formaction="/{{user.id}}/{{post.id}}/delete" formmethod="POST" class="btn btn-danger m-4" onclick="return confirm('Are you sure you want to DELETE this post?')">Delete</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    {% endblock %}

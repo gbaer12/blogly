@@ -3,13 +3,16 @@
     {% block title%}New User Form{% endblock %}
 
     {% block content %}
-    <div>
-        <h1>Create User</h1>
+    <div class="container">
+        <div class="h1 pb-2 mb-4 text-success border-bottom border-sucess">
+            Create User
+        </div>
+
         <form action="/" method="POST">
-            <section>
+            <div>
                 <label for="first-name">First Name</label>
-                <input type="text" name="first-name" placeholder="Enter a first name" aria-label="First Name">
-            </section>
+                <input type="text" name="first-name" placeholder="Enter a first name" aria-label="First Name" required>
+            </div>
     
             <section>
                 <label for="last-name">Last Name</label>
@@ -21,11 +24,9 @@
                 <input type="text" name="image-url" placeholder="Provide an image url" aria-label="Image URL">
             </section>
 
-            <button>Create user</button>
+            <button class="btn btn-primary m-2">Create user</button>
         </form>
 
-        <form action="/">
-            <button>Go Back</button>
-        </form>
+        <a href="/" class="btn btn-primary m-2">Go Back</a>
     </div>
     {% endblock %}

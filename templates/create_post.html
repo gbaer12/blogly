@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+    {% block title%}Create Post{% endblock %}
+
+    {% block content %}
+    <div class="container">
+    
+    <div class="h1 pb-2 mb-4 text-success border-bottom border-sucess">
+        Add Post for {{user.first_name}} {{user.last_name}}
+    </div>
+
+    <form action="/{{user.id}}" method="POST">
+        <div class="m-3">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="post-title" placeholder="Enter a title" required>
+        </div>
+
+        <div class="m-3 input-group">
+        <span class="input-group-text">Post Content</span>
+        <textarea name="content" id="post-content" cols="30" rows="10" placeholder="Enter text" required></textarea>
+        </div>
+
+        <button class="btn btn-primary">Create Post</button>
+    </form>
+        <a href="/{{user.id}}" class="btn btn-danger mt-2">Cancel</a>
+    </div>
+    {% endblock %}

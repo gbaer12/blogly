@@ -1,4 +1,6 @@
+import datetime
 from flask_sqlalchemy import SQLAlchemy
+
 
 db = SQLAlchemy()
 
@@ -15,21 +17,43 @@ class User(db.Model):
 
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer,
-                   primary_key=True,
+    id = db.Column(db.Integer, 
+                   primary_key=True, 
                    autoincrement=True)
-    first_name = db.Column(db.String(30),
-                           nullable=False,
+    first_name = db.Column(db.String(30), 
+                           nullable=False, 
                            unique=False)
-    last_name = db.Column(db.String(30),
-                          nullable=False,
+    last_name = db.Column(db.String(30), 
+                          nullable=False, 
                           unique=False)
-    image_url = db.Column(db.Text,
-                          nullable=False,
+    image_url = db.Column(db.Text, 
+                          nullable=False, 
                           default=DEFAULT_IMAGE_URL)
+
+    posts = db.relationship('Post', backref='user', cascade='all, delete-orphan')
     
 def __repr__(self):
     u = self
     return f'<User id={u.id} first_name={u.first_name} last_name={u.last_name} image_url={u.image_url}'
 
 
+class Post(db.Model):
+    """Posts"""
+
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, 
+                   primary_key=True, 
+                   autoincrement=True)
+    title = db.Column(db.Text, 
+                      nullable=False)
+    content = db.Column(db.Text, 
+                        nullable=False)
+    created_at = db.Column(db.DateTime, 
+                           nullable=False, 
+                           default=datetime.datetime.utcnow)
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.id'), 
+                        nullable=False)
+
+    

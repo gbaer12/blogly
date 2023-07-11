@@ -3,18 +3,25 @@
     {% block title%}Users{% endblock %}
 
     {% block content %}
-    <h1>All Users</h1>
+    <div class="container">
+        <div class="card text-center">
+        <div class="card-header bg-primary text-light">Blogly</div>
+        
+        <div class="card-body">
+            <h3 class="card-title">All Users</h3>
 
+            <p>
+                {% for user in users %}
+                <div>
+                <a href="/{{user.id}}" class="btn btn-info m-1">{{user.first_name}} {{user.last_name}}</a>
+                </div>
+                {% endfor %}
+            </p>
 
-    <ul>
-        {% for user in users %}
-        <li><a href="/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></li>
-        {% endfor %}
-    </ul>
+        <a href="/create" class="btn btn-primary">Add user</a>
+        </div>
 
-    <form action="/create">
-        <button>Add user</button>
-    </form>
-
+        </div>
+    </div>
 
     {% endblock %}

@@ -3,30 +3,40 @@
     {% block title%}User Details{% endblock %}
 
     {% block content %}
-    <h1>User: {{user.first_name}} {{user.last_name}}</h1>
+    <div class="container">
+    <div class="card" style="width: 25rem; height: 50rem;">
+        <img class="card-img-top" src="{{user.image_url}}" alt=""
+        width="400" height="300">
+        <div class="card-body">
+            <h5 class="card-title">User: {{user.first_name}} {{user.last_name}}</h1>
+            
+            <form action="">
+            <a href="/{{user.id}}/edit" class="btn btn-warning">Edit</a>
+            
+            
+            <button formaction="/{{user.id}}/delete" formmethod="POST" class="btn btn-danger" onclick="return confirm('Are you sure you want to DELETE this user?')">Delete</button>
+            </form>
 
-    <div>
-        <img src="{{user.image_url}}" alt=""
-        width="200" height="200">
+        <div class="card-body">
+            <h6>Posts</h6>
+            <ul>
+                {% for post in user.posts %}
+                <li>
+                <form action="">
+                    <a href="/{{user.id}}/{{post.id}}" class="btn btn-info btn-lg">{{post.title}}</a>
+                    <button formaction="/{{user.id}}/{{post.id}}/delete" formmethod="POST" class="btn btn-danger btn-sm m-4" onclick="return confirm('Are you sure you want to DELETE this post?')">X</button>
+                </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card-body">
+            <a href="/{{user.id}}/posts" class="btn btn-primary">Add Post</a>
+            <a href="/" class="btn btn-primary">Go Back</a>
+        </div>
+
+        </div>
     </div>
-
-    <div>
-        <ul>
-            <!-- <li>ID: {{user.id}}</li> -->
-            <li>First Name: {{user.first_name}}</li>
-            <li>Last Name: {{user.last_name}}</li>
-        </ul>
     </div>
-
-    <form action="/{{user.id}}/edit">
-        <button>Edit</button>
-    </form>
-    
-    <form action="/{{user.id}}/delete" method="POST">
-        <button onclick="return confirm('Are you sure you want to DELETE this user?')">Delete</button>
-    </form>
-
-    <form action="/">
-        <button>Go Back</button>
-    </form>
     {% endblock %}
