@@ -115,7 +115,8 @@ def create_post(user_id):
     new_content = request.form['content']
     new_post = Post(title=new_title,
                     content=new_content,
-                    user_id=user_id)
+                    user_id=user_id,
+                    tags=tags)
 
     db.session.add(new_post)
     db.session.commit()
@@ -128,7 +129,8 @@ def show_post(user_id, post_id):
 
     user = User.query.get_or_404(user_id)
     post = Post.query.get_or_404(post_id)
-    return render_template('post_detail.html', user=user, post=post)
+    tags = Tag.query.all()
+    return render_template('post_detail.html', user=user, post=post, tags=tags)
 
 @app.route('/<int:user_id>/<int:post_id>/edit')
 def show_post_edit(user_id, post_id):
